@@ -31,7 +31,15 @@
 
 /* _____________ Your Code Here _____________ */
 
-type MyPick<T, K> = any
+type MyPick<T, K extends keyof T> = { [k in K]: T[k] }
+
+/**
+ * In the TypeScript code type MyPick<T, K extends keyof T> = { [k in K]: T[k]; }, the [ ] and [k in K] are used in the context of creating a new type by picking a subset of properties from an existing type.
+
+[ ] is used to create an object type literal. It defines a new object type with properties that are specified inside the brackets. For example, { [key: string]: number } defines an object type with keys of type string and values of type number.
+
+[k in K] is called a mapped type. It allows us to iterate over the keys in a type K and apply a transformation to each key k. In the context of MyPick, [k in K] maps over the keys K and creates a new type with only the properties from T that are included in K. So if T is { a: string; b: number; c: boolean; } and K is 'a' | 'b', then MyPick<T, K> would be { a: string; b: number; }.
+ */
 
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
