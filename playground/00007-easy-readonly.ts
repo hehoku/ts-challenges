@@ -31,13 +31,39 @@
 
 /* _____________ Your Code Here _____________ */
 
-type MyReadonly<T> = any
+type MyReadonly<T> = {
+  readonly [P in keyof T]: T[P];
+}
+
+/**
+ * explain code
+readonly: TypeScript additionally has a readonly modifier for properties.
+
+In TypeScript, `[k in K]` and `[P in keyof T]` are examples of **mapped types**, which allow you to create new types based on existing ones by transforming their properties¹. The difference is that `K` can be any type that extends `keyof T`, while `keyof T` is a special operator that returns a union of all property names of `T`². For example:
+
+```typescript
+type Point = { x: number; y: number };
+type K = "x" | "y";
+type P = keyof Point;
+
+// These two types are equivalent
+type A = { [k in K]: string };
+type B = { x: string; y: string };
+
+// These two types are not equivalent
+type C = { [P in keyof Point]: string };
+// type C = { x: string; y: string; };
+type D = { x: string; y: string; z: string };
+```
+
+ */
 
 /* _____________ Test Cases _____________ */
-import type { Equal, Expect } from '@type-challenges/utils'
+import type { Equal, Expect, NotEqual } from '@type-challenges/utils'
 
 type cases = [
   Expect<Equal<MyReadonly<Todo1>, Readonly<Todo1>>>,
+  Expect<NotEqual<C, D>>,
 ]
 
 interface Todo1 {
@@ -48,6 +74,18 @@ interface Todo1 {
     author: string
   }
 }
+
+type Point = { x: number; y: number }
+type K = 'x' | 'y'
+type P = keyof Point
+
+// These two types are equivalent
+type A = { [k in K]: string }
+type B = { x: string; y: string }
+
+// These two types are not equivalent
+type C = { [P in keyof Point]: string }
+type D = { x: string; y: string; z: string }
 
 /* _____________ Further Steps _____________ */
 /*
