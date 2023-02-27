@@ -24,7 +24,7 @@
 
 This repo has added code, My question and the explanation from ChatGPT.
 
-Thanks to my ChatGPT, God of Wisdom, Hermes.
+Thanks to my ChatGPT, God of Wisdom, Hermes.(Bing for me when ChatGPT is unavailable :-))
 
 ## Challenges
 
