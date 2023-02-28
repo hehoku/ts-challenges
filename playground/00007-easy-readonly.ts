@@ -39,7 +39,13 @@ type MyReadonly<T> = {
  * explain code
 readonly: TypeScript additionally has a readonly modifier for properties.
 
-In TypeScript, `[k in K]` and `[P in keyof T]` are examples of **mapped types**, which allow you to create new types based on existing ones by transforming their properties¹. The difference is that `K` can be any type that extends `keyof T`, while `keyof T` is a special operator that returns a union of all property names of `T`². For example:
+In TypeScript, the syntax [k in K] and [P in keyof T] are both examples of mapped types.
+
+[k in K] creates a new type by mapping over the keys k in the type K. For example, given the type type MyType = { a: string, b: number }, [k in keyof MyType] would result in the type { a: any, b: any }.
+
+On the other hand, [P in keyof T] creates a new type by mapping over the keys P in the type keyof T. For example, given the type type MyType = { a: string, b: number }, [P in keyof MyType] would result in the type "a" | "b".
+
+So, the key difference is that [k in K] maps over a specific type K, whereas [P in keyof T] maps over the keys of a specific type T.
 
 ```typescript
 type Point = { x: number; y: number };
