@@ -20,7 +20,12 @@
 
 /* _____________ Your Code Here _____________ */
 
-type TupleToObject<T extends readonly any[]> = any
+type TupleToObject<T extends readonly any[]> = { [K in T[number]]: K }
+
+/**
+T[number] gets the union of all the types in the tuple T.
+[K in T[number]] 外部的 `[]` 作用是遍历
+ */
 
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
