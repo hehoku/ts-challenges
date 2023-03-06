@@ -22,7 +22,24 @@
 
 /* _____________ Your Code Here _____________ */
 
-type Length<T> = any
+type Length<T> = T extends { length: infer L } ? L : never
+
+/**
+
+This code defines a type alias Length<T> which takes a generic type T.
+
+The T extends { length: infer L } is a conditional type which checks if the type
+T extends an object with a property length of type infer L. The infer keyword is
+used to capture the type of the length property and assign it to the type variable
+L.
+
+If the condition is true, the type alias Length<T> evaluates to L. Otherwise, it
+evaluates to never.
+
+In simpler terms, this code is used to extract the length of an array or string
+type. It checks if the input type has a length property and if it does, it assigns
+the type of length to the Length<T> type.
+ */
 
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
