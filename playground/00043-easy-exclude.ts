@@ -20,7 +20,18 @@
 
 /* _____________ Your Code Here _____________ */
 
-type MyExclude<T, U> = any
+type MyExclude<T, U> = T extends U ? never : T
+
+/**
+This is a TypeScript code that defines a generic (泛型) type MyExclude which takes
+two type parameters T and U.
+
+The type MyExclude uses a conditional type that checks if T extends (延长) U. If
+T extends (延长) U, then the type never is returned. Otherwise, the type T is returned.
+
+In other words, MyExclude returns a new type that excludes any type in T that is
+assignable to U. It is similar to the built-in Exclude type in TypeScript.
+ */
 
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
