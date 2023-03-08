@@ -23,5 +23,6 @@
     "esno",
     "picocolors",
     "sinoon"
-  ]
+  ],
+  "javascript.format.enable": true
 }

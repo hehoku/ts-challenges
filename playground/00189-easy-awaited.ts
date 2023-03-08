@@ -22,7 +22,18 @@
 
 /* _____________ Your Code Here _____________ */
 
-type MyAwaited<T> = any
+type MyAwaited<T> = T extends PromiseLike<infer U> ? MyAwaited<U> : T
+// type MyAwaited<T> = Awaited<Promise<PromiseLike<T>>>
+
+/**
+The Awaited type is a utility type that recursively unwraps Promise types. It is
+defined as follows:
+
+type Awaited<T> = T extends PromiseLike<infer U> ? MyAwaited<U> : T;
+This means that if T is a Promise-like type, then MyAwaited<T> is the same as
+MyAwaited<U>, where U is the type of the value that T resolves to. Otherwise, if
+T is not a Promise-like type, then MyAwaited<T> is just T.
+ */
 
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
