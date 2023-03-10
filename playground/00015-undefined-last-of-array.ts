@@ -24,8 +24,14 @@
 
 /* _____________ Your Code Here _____________ */
 
-type Last<T extends any[]> = any
+type Last<T extends any[]> = T extends [... infer _, infer L] ? L : never
 
+/**
+在 ts 中，infer 是一种用来从泛型中推断/提取出其他类型的关键字。通常用于条件类型中。
+
+在定义一个泛型类型时，如果不知道具体的类型参数是什么，但又希望根据传入的类型参数推
+断出其他类型，则可以使用infer关键字。
+ */
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
 
