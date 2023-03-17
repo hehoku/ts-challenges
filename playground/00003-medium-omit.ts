@@ -30,7 +30,10 @@
 
 /* _____________ Your Code Here _____________ */
 
-type MyOmit<T, K> = any
+type MyOmit<T, K> = Pick<T, Exclude<keyof T, K>>
+// Pick<T, K>，它通过选取 K 中指定的键来创建一个新类型。
+// Exclude<T, U> 工具类型从 T 中减去 U 中的键，得到一个新类型，该类型仅包括 T 中
+// 不在 U 中的键。
 
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
