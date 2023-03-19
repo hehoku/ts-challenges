@@ -34,7 +34,20 @@
 
 /* _____________ Your Code Here _____________ */
 
-type MyReadonly2<T, K> = any
+type MyReadonly2<T, K extends keyof T = keyof T> = {
+  readonly [P in K]: T[P]
+} & Omit<T, K>
+
+/**
+这段代码定义了一个泛型类型 `MyReadonly2`，它接受两个参数：T 和 K。其中 T 是一个对
+象类型，K 是 T 中的键名集合。
+
+该类型使用了 TypeScript 的映射类型语法 `[P in K]` 来遍历并将 K 中的所有键名变为只
+读属性，并与原始对象中除去这些键之外的其他属性组成新的对象。
+
+而 `&` 符号则表示取交集操作，即将上述两个对象进行交集运算得到最终结果。因此，最终
+返回值是一个包含部分只读属性和部分可写属性的新对象。
+ */
 
 /* _____________ Test Cases _____________ */
 import type { Alike, Expect } from '@type-challenges/utils'
